@@ -1,18 +1,14 @@
-from flask import Flask, request
-from twilio import twiml
- 
- 
-app = Flask(__name__)
- 
- 
-@app.route('/sms', methods=['POST'])
-def sms():
-    number = request.form['From']
-    message_body = request.form['Body']
- 
-    resp = twiml.Response()
-    resp.message('Hello {}, you said: {}'.format(number, message_body))
-    return str(resp)
- 
-if __name__ == '__main__':
-    app.run()
+# /usr/bin/env python
+# Download the twilio-python library from twilio.com/docs/libraries/python
+from twilio.rest import Client
+
+# Find these values at https://twilio.com/user/account
+account_sid = "AC15b4f279248b559ac41e6e92f039ce30"
+auth_token = "b546ebf94dd2010a5646c4a68aadeac5"
+
+client = Client(account_sid, auth_token)
+
+client.api.account.messages.create(
+    to="+12369820317",
+    from_="+16138016729",
+    body="Hello there!")
