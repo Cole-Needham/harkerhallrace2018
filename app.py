@@ -1,6 +1,7 @@
 # /usr/bin/env python
 # Download the twilio-python library from twilio.com/docs/libraries/python
 import os
+import logging
 from twilio.rest import Client
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
@@ -28,7 +29,7 @@ def sms_echo():
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int('5000'))
 
-else:
+else:  # Running in Foreman / heroku
     stream_handler = logging.StreamHandler()
     stream_handler.setLevel(logging.INFO)
     app.logger.addHandler(stream_handler)
