@@ -22,6 +22,10 @@ def sms():
     resp.message('Hello {}, you said: {}'.format(number, message_body))
     return str(resp)
 
-if __name__ = "__main__":
-    port = int(os.environ.get("PORT",5000))
-    app.run(host='0.0.0.0', port=port)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=int('5000'))
+
+else:
+    stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(logging.INFO)
+    app.logger.addHandler(stream_handler)
