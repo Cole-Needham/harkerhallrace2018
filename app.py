@@ -1,17 +1,12 @@
-# /usr/bin/env python
-# Download the twilio-python library from twilio.com/docs/libraries/python
-import os
 import logging
-from twilio.rest import Client
-from flask import Flask, request, redirect
-from twilio.twiml.messaging_response import MessagingResponse
-from twilio import twiml
+
+from flask import Flask, request
+
 
 app = Flask(__name__)
-account_sid = "AC15b4f279248b559ac41e6e92f039ce30"
-auth_token = "b546ebf94dd2010a5646c4a68aadeac5"
-t_client = Client(account_sid,auth_token)
-@app.route("/sms/", methods=['GET', 'POST'])
+
+
+@app.route('/sms/')
 def sms_echo():
     # https://github.com/twilio/twilio-python#api-credentials
 
@@ -26,8 +21,10 @@ def sms_echo():
                 '<Response>'
                 '<Message>{}</Message>'
                 '</Response>'.format(sms_body))
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=int('5000'))
+
+
+if __name__ == "__main__":  # Running eg `python server.py`
+    app.run(debug=True)
 
 else:  # Running in Foreman / heroku
     stream_handler = logging.StreamHandler()
